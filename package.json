@@ -1,8 +1,12 @@
 {
+  "scripts": {
+    "start": "pm2 start app.js"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.1",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "pm2": "^5.3.0",
     "puppeteer": "^21.3.8"
   }
 }
