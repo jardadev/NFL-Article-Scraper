@@ -1,3 +1,4 @@
+from db.articles import save
 from bs4 import BeautifulSoup
 import requests
 
@@ -82,6 +83,8 @@ def scrape():
 
         print(f'Successfully scraped {len(parsed_articles)} {team} articles.') if parsed_articles\
             else print(f'No articles scraped for {team}')
+
+    save(parsed_articles)
 
 
 if __name__ == '__main__':
