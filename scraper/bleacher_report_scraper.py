@@ -51,9 +51,9 @@ def scrape():
         Returns:
             list[dict]: A list of dictionaries containing scraped article data.
     """
-    parsed_articles: list[dict] = []
 
     for team in NFL_TEAMS.values():
+        parsed_articles: list[dict] = []
         print(team)
         br_url = f'https://bleacherreport.com/{team}'
         print(br_url)
@@ -80,11 +80,9 @@ def scrape():
                 'team': team
             }
             parsed_articles.append(article)
-
-        print(f'Successfully scraped {len(parsed_articles)} {team} articles.') if parsed_articles\
+        print(f'Successfully scraped {len(parsed_articles)} {team} articles.') if parsed_articles \
             else print(f'No articles scraped for {team}')
-
-    save(parsed_articles)
+        save(parsed_articles)
 
 
 if __name__ == '__main__':

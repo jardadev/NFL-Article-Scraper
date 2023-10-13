@@ -1,4 +1,4 @@
-from config import supa
+from db.config import supa
 
 TABLE = 'articles'
 
@@ -30,15 +30,12 @@ def remove_duplicate_articles(articles):
             list: A list of unique article dictionaries after removing duplicates.
     """
     query_results: list[object] = supa.table(TABLE).select('headline').execute()
-    column_articles = []
-
-    for article in query_results.data:
-        column_articles.append(article)
+    column_articles = query_results.data
 
     filtered_articles: list[object] = []
     article_headlines = []
 
-    for article in column_articles:
+    for article in articles:
         for obj in column_articles:
             article_headlines.append(obj['headline'])
         if article['headline'] in article_headlines:
