@@ -1,8 +1,10 @@
+require('dotenv').config();
 const puppeteer = require('puppeteer');
 const NFL_TEAMS = require('./nfl-data');
+const { save } = require('./supabase');
 
 async function scrapeBleacherReport() {
-	const browser = await puppeteer.launch({ headless: false });
+	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 	for (const team of NFL_TEAMS) {
 		const teamArticles = [];
@@ -43,9 +45,22 @@ async function scrapeBleacherReport() {
 				team: teamName,
 			});
 		}
-		console.log(teamArticles);
+		save(teamArticles);
 	}
 	await browser.close();
 }
 
-scrapeBleacherReport();
+function delay(time) {
+	return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+async function run() {
+	// const interval = 1000 * 60 * 60 * 12; // 12 hours
+	const interval = 10000; // 12 hours
+	while (true) {
+		await scrapeBleacherReport();
+		await delay(interval);
+	}
+}
+
+run();
