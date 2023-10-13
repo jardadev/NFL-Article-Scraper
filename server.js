@@ -4,7 +4,7 @@ const NFL_TEAMS = require('./nfl-data');
 const { save } = require('./supabase');
 
 async function scrapeBleacherReport() {
-	const browser = await puppeteer.launch();
+	const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
 	const page = await browser.newPage();
 	for (const team of NFL_TEAMS) {
 		const teamArticles = [];
